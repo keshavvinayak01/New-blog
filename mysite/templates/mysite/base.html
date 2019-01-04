@@ -1,0 +1,35 @@
+{% load static %}
+<html>
+    <head>
+        <title>Keshav's second blog</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/mysite.css' %}">
+    </head>
+    <body>
+        <div class="page-header" style="min-height:17vh;">
+            {% if user.is_authenticated %}
+                <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+                <a href="{% url 'post_draft_list' username=user.username %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
+                <a href="{% url 'logout' %}" class="top-menu"><i class="fas fa-sign-out-alt fa-1x"></i></a>
+                <a href="{% url 'profile_edit' %}" class="top-menu"><i class="fas fa-user-edit fa-1x"></i></a>
+                <a href="{% url 'profile_view' username=user.username %}" class="top-menu"><i class="fas fa-user fa-1x"></i></a>
+            {% else %}
+                    <a href="{% url 'login' %}" class="top-menu"><i class="fas fa-sign-in-alt fa-1x"></i></span></a>
+                    <a href="{% url 'signup' %}" class="top-menu"><i class="fas fa-user-plus fa-1x"></i></a>
+            {% endif %}
+            <h1 align="left" style="padding-left:4vw;margin:0px;"><a href="/">Keshav's blog</a></h1>
+        </div>
+        <hr>
+        <div class="content container">
+		    <div class="row">
+		        <div class="col-md-8">
+		        {% block content %}
+		        {% endblock %}
+		        </div>
+		    </div>
+		</div>
+    </body>
+</html>
+
